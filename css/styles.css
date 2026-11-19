@@ -1,0 +1,92 @@
+/* Honey BD - warm amber, mobile-first. No web fonts, no network. */
+* { box-sizing: border-box; }
+:root {
+  --amber: #92400e;
+  --amber-deep: #78350f;
+  --honey: #b45309;
+  --honey-soft: #fef3c7;
+  --cream: #fffbeb;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --danger: #b91c1c;
+  --green: #15803d;
+}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.5;
+}
+header, nav, main, footer { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { padding-top: 20px; padding-bottom: 8px; }
+header h1 { margin: 0; font-size: 1.6rem; color: var(--amber-deep); }
+header p { margin: 4px 0 12px; color: var(--muted); font-size: .95rem; }
+#langBtn {
+  appearance: none; border: 1px solid var(--honey); background: #fff; color: var(--honey);
+  padding: 8px 16px; border-radius: 9px; font-size: .95rem; cursor: pointer;
+}
+#langBtn:hover { background: var(--honey-soft); }
+nav#tabs { display: flex; gap: 8px; flex-wrap: wrap; margin: 8px auto 16px; }
+nav#tabs button {
+  flex: 1 1 auto; padding: 10px 8px; border: 1px solid var(--line); background: #fff;
+  border-radius: 10px; font-size: .95rem; cursor: pointer; color: var(--ink);
+}
+nav#tabs button.active { background: var(--amber); color: #fff; border-color: var(--amber); }
+#msg {
+  max-width: 860px; margin: 0 auto 16px; padding: 10px 14px; border-radius: 9px;
+  background: #fef3c7; color: var(--amber-deep);
+}
+main { padding-bottom: 40px; }
+h2 { margin: 0 0 10px; font-size: 1.15rem; color: var(--amber-deep); }
+h2:not(:first-child) { margin-top: 24px; }
+.muted { color: var(--muted); font-size: .92rem; }
+.empty { color: var(--muted); }
+.error { color: var(--danger); font-size: .9rem; margin: 4px 0 10px; }
+.totals { font-weight: 600; margin: 12px 0; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 16px; }
+.stat { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 12px 8px; text-align: center; }
+.stat strong { display: block; font-size: 1.4rem; color: var(--honey); }
+.stat-label { font-size: .82rem; color: var(--muted); display: block; }
+ul.list { list-style: none; margin: 0 0 16px; padding: 0; }
+ul.list li { padding: 10px 0; border-bottom: 1px solid var(--line); }
+ul.list li:last-child { border-bottom: 0; }
+li.card {
+  background: #fff; border: 1px solid var(--line); border-radius: 12px;
+  padding: 12px; margin-bottom: 10px;
+  display: flex; justify-content: space-between; gap: 10px; align-items: flex-start;
+}
+li.card .row { display: flex; gap: 6px; flex-shrink: 0; }
+table.table { width: 100%; border-collapse: collapse; background: #fff; margin-bottom: 16px; }
+table.table th, table.table td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; font-size: .95rem; }
+table.table th { background: var(--honey-soft); color: var(--amber-deep); }
+label { display: block; margin-bottom: 12px; font-weight: 600; font-size: .92rem; }
+label span { display: block; margin-bottom: 4px; }
+input[type="text"], input[type="date"], input[type="number"], select, textarea {
+  width: 100%; padding: 10px 12px; font-size: 1rem;
+  border: 1px solid #d1d5db; border-radius: 9px; background: #fff; color: var(--ink);
+  font-family: inherit;
+}
+input.invalid, select.invalid { border-color: var(--danger); outline: 2px solid #fecaca; }
+button, .file-label {
+  appearance: none; border: 1px solid #d1d5db; background: #fff; color: var(--ink);
+  padding: 10px 16px; border-radius: 9px; font-size: .95rem; cursor: pointer;
+}
+button:hover, .file-label:hover { background: #f3f4f6; }
+button[type="submit"] { background: var(--honey); border-color: var(--honey); color: #fff; }
+button[type="submit"]:hover { background: var(--amber); }
+button.danger { border-color: var(--danger); color: var(--danger); }
+button.danger:hover { background: #fef2f2; }
+form { background: #fff; border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin-bottom: 16px; }
+.data-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+.file-label input { display: none; }
+#exportOut { margin-top: 12px; }
+footer { padding-bottom: 24px; }
+footer p { color: var(--muted); font-size: .85rem; text-align: center; border-left: 3px solid var(--honey); padding-left: 10px; }
+@media (max-width: 480px) {
+  header h1 { font-size: 1.3rem; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  li.card { flex-wrap: wrap; }
+  nav#tabs button { font-size: .88rem; padding: 9px 6px; }
+}

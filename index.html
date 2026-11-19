@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Honey BD - Beekeeping Tracker</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<header>
+  <h1 id="appTitle">Honey BD</h1>
+  <p id="appSub" data-i18n="appSub"></p>
+  <button id="langBtn" type="button">Bangla</button>
+</header>
+
+<nav id="tabs" aria-label="Sections">
+  <button type="button" id="tabDashboardBtn" data-tab="dashboard" data-i18n="tabDashboard"></button>
+  <button type="button" id="tabHivesBtn" data-tab="hives" data-i18n="tabHives"></button>
+  <button type="button" id="tabInspectionsBtn" data-tab="inspections" data-i18n="tabInspections"></button>
+  <button type="button" id="tabHarvestBtn" data-tab="harvest" data-i18n="tabHarvest"></button>
+  <button type="button" id="tabExpensesBtn" data-tab="expenses" data-i18n="tabExpenses"></button>
+  <button type="button" id="tabDataBtn" data-tab="data" data-i18n="tabData"></button>
+</nav>
+
+<p id="msg" role="status" hidden></p>
+
+<main>
+  <section id="secDashboard">
+    <div class="stats">
+      <div class="stat"><span class="stat-label" data-i18n="statsHives"></span><strong id="statHives">0</strong></div>
+      <div class="stat"><span class="stat-label" data-i18n="statsActive"></span><strong id="statActive">0</strong></div>
+      <div class="stat"><span class="stat-label" data-i18n="statsKg"></span><strong id="statKg">0</strong></div>
+      <div class="stat"><span class="stat-label" data-i18n="statsRevenue"></span><strong id="statRevenue"></strong></div>
+      <div class="stat"><span class="stat-label" data-i18n="statsExpenses"></span><strong id="statExpenses"></strong></div>
+      <div class="stat"><span class="stat-label" data-i18n="statsNet"></span><strong id="statNet"></strong></div>
+    </div>
+    <h2 data-i18n="dueTitle"></h2>
+    <ul id="dueList" class="list"></ul>
+    <h2 data-i18n="recentTitle"></h2>
+    <ul id="recentList" class="list"></ul>
+    <h2 data-i18n="yieldTitle"></h2>
+    <table class="table">
+      <thead><tr>
+        <th data-i18n="yieldHive"></th><th data-i18n="yieldKg"></th>
+        <th data-i18n="yieldRevenue"></th><th data-i18n="yieldCount"></th>
+      </tr></thead>
+      <tbody id="yieldBody"></tbody>
+    </table>
+    <p id="yieldEmpty" class="empty" hidden data-i18n="yieldEmpty"></p>
+  </section>
+
+  <section id="secHives" hidden>
+    <h2 data-i18n="hivesTitle"></h2>
+    <ul id="hiveList" class="list"></ul>
+    <p id="hiveEmpty" class="empty" hidden data-i18n="hivesEmpty"></p>
+    <form id="hiveForm" novalidate>
+      <label><span data-i18n="hiveName"></span>
+        <input id="hiveNameInput" type="text" maxlength="60" required data-i18n-ph="hiveNamePh"></label>
+      <label><span data-i18n="hiveType"></span><select id="hiveTypeSelect"></select></label>
+      <label><span data-i18n="hiveLocation"></span>
+        <input id="hiveLocationInput" type="text" maxlength="80" data-i18n-ph="hiveLocationPh"></label>
+      <label><span data-i18n="hiveStarted"></span><input id="hiveStartedInput" type="date" required></label>
+      <label><span data-i18n="hiveStrength"></span><select id="hiveStrengthSelect"></select></label>
+      <label><span data-i18n="hiveStatus"></span><select id="hiveStatusSelect"></select></label>
+      <label><span data-i18n="hiveNote"></span>
+        <input id="hiveNoteInput" type="text" maxlength="200" data-i18n-ph="hiveNotePh"></label>
+      <p id="hiveErr" class="error" hidden></p>
+      <button type="submit" id="hiveSaveBtn" data-i18n="hiveAdd"></button>
+      <button type="button" id="hiveCancelBtn" hidden data-i18n="hiveCancel"></button>
+    </form>
+  </section>
+
+  <section id="secInspections" hidden>
+    <h2 data-i18n="inspTitle"></h2>
+    <p id="inspNoHive" class="empty" hidden data-i18n="selectHiveFirst"></p>
+    <form id="inspForm" novalidate>
+      <label><span data-i18n="inspHive"></span><select id="inspHiveSelect"></select></label>
+      <label><span data-i18n="inspDate"></span><input id="inspDateInput" type="date" required></label>
+      <label><span data-i18n="inspQueen"></span><select id="inspQueenSelect"></select></label>
+      <label><span data-i18n="inspBrood"></span><select id="inspBroodSelect"></select></label>
+      <label><span data-i18n="inspStores"></span><select id="inspStoresSelect"></select></label>
+      <label><span data-i18n="inspTemp"></span><select id="inspTempSelect"></select></label>
+      <label><span data-i18n="inspNextDue"></span><input id="inspNextDueInput" type="date" required></label>
+      <label><span data-i18n="inspNote"></span><input id="inspNoteInput" type="text" maxlength="200"></label>
+      <p id="inspErr" class="error" hidden></p>
+      <button type="submit" id="inspSaveBtn" data-i18n="inspAdd"></button>
+    </form>
+    <ul id="inspList" class="list"></ul>
+    <p id="inspEmpty" class="empty" hidden data-i18n="inspEmpty"></p>
+  </section>
+
+  <section id="secHarvest" hidden>
+    <h2 data-i18n="harvTitle"></h2>
+    <p id="harvNoHive" class="empty" hidden data-i18n="selectHiveFirst"></p>
+    <form id="harvForm" novalidate>
+      <label><span data-i18n="harvHive"></span><select id="harvHiveSelect"></select></label>
+      <label><span data-i18n="harvDate"></span><input id="harvDateInput" type="date" required></label>
+      <label><span data-i18n="harvKg"></span><input id="harvKgInput" type="number" min="0.01" max="500" step="0.01" required></label>
+      <label><span data-i18n="harvPrice"></span><input id="harvPriceInput" type="number" min="0" max="100000" step="0.01" required></label>
+      <label><span data-i18n="harvBuyer"></span>
+        <input id="harvBuyerInput" type="text" maxlength="60" data-i18n-ph="harvBuyerPh"></label>
+      <p id="harvErr" class="error" hidden></p>
+      <button type="submit" id="harvSaveBtn" data-i18n="harvAdd"></button>
+    </form>
+    <p id="harvTotals" class="totals"></p>
+    <ul id="harvList" class="list"></ul>
+    <p id="harvEmpty" class="empty" hidden data-i18n="harvEmpty"></p>
+  </section>
+
+  <section id="secExpenses" hidden>
+    <h2 data-i18n="expTitle"></h2>
+    <form id="expForm" novalidate>
+      <label><span data-i18n="expDate"></span><input id="expDateInput" type="date" required></label>
+      <label><span data-i18n="expCategory"></span><select id="expCatSelect"></select></label>
+      <label><span data-i18n="expAmount"></span><input id="expAmountInput" type="number" min="0.01" max="10000000" step="0.01" required></label>
+      <label><span data-i18n="expNote"></span><input id="expNoteInput" type="text" maxlength="200"></label>
+      <p id="expErr" class="error" hidden></p>
+      <button type="submit" id="expSaveBtn" data-i18n="expAdd"></button>
+    </form>
+    <p id="expTotals" class="totals"></p>
+    <ul id="expList" class="list"></ul>
+    <p id="expEmpty" class="empty" hidden data-i18n="expEmpty"></p>
+  </section>
+
+  <section id="secData" hidden>
+    <h2 data-i18n="dataTitle"></h2>
+    <p data-i18n="dataHint"></p>
+    <button type="button" id="exportBtn" data-i18n="exportBtn"></button>
+    <textarea id="exportOut" rows="6" readonly hidden></textarea>
+    <div class="data-row">
+      <label class="file-label"><span data-i18n="importBtn"></span>
+        <input id="importFile" type="file" accept="application/json,.json"></label>
+      <button type="button" id="eraseBtn" class="danger" data-i18n="eraseBtn"></button>
+    </div>
+  </section>
+</main>
+
+<footer><p data-i18n="footerNote"></p></footer>
+
+<script src="js/data.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/logic.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
